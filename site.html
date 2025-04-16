@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Підбір ПК для ігор</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-image: url("images/155396-kiberpank_2077-avtomobilnoe_osveshhenie-zdanie-okno-elektrichestvo-3840x2160.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #39ff14;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.8);
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      border-radius: 20px;
+      margin-top: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14;
+    }
+
+    label, select, .card {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    select {
+      padding: 0.5rem;
+      background: black;
+      border: 1px solid #39ff14;
+      color: #39ff14;
+    }
+
+    .card {
+      background-color: rgba(25, 25, 25, 0.8);
+      border: 1px solid #39ff14;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Підбір ПК під ігри</h1>
+
+    <label for="game">Оберіть гру:</label>
+    <select id="game" onchange="updateSpecs()">
+      <option value="cyberpunk">Cyberpunk 2077</option>
+      <option value="gta">GTA V</option>
+      <option value="cs2">CS2</option>
+      <option value="dota">Dota 2</option>
+      <option value="rdr2">Red Dead Redemption 2</option>
+      <option value="re8">Resident Evil 8</option>
+    </select>
+
+    <div id="specs"></div>
+  </div>
+
+  <script>
+    const specs = {
+      cyberpunk: {
+        "Низькі": { CPU: "i5-4460 / FX-6300", GPU: "GTX 780 / RX 470", RAM: "8 GB" },
+        "Середні": { CPU: "i7-4790 / R3 3200G", GPU: "GTX 1060 / RX 580", RAM: "12 GB" },
+        "Високі": { CPU: "i7-9700K / R5 3600", GPU: "RTX 2060 / RX 5700 XT", RAM: "16 GB" },
+      },
+      gta: {
+        "Низькі": { CPU: "Q6600 / Phenom 9850", GPU: "9800 GT / HD 4870", RAM: "4 GB" },
+        "Середні": { CPU: "i5-3470 / FX-8350", GPU: "GTX 660 / HD 7870", RAM: "8 GB" },
+        "Високі": { CPU: "i7-8700 / R5 3600", GPU: "GTX 1080 / RX 5700", RAM: "16 GB" },
+      },
+      cs2: {
+        "Низькі": { CPU: "i3-6100 / R3 1200", GPU: "GTX 750 Ti / RX 550", RAM: "8 GB" },
+        "Середні": { CPU: "i5-7400 / R3 3100", GPU: "GTX 1050 Ti / RX 560", RAM: "8 GB" },
+        "Високі": { CPU: "i5-9600K / R5 3600", GPU: "GTX 1660 / RX 580", RAM: "16 GB" },
+      },
+      dota: {
+        "Низькі": { CPU: "Core 2 Duo / Athlon X2", GPU: "Intel HD 3000 / HD 2400", RAM: "4 GB" },
+        "Середні": { CPU: "i3 / FX-4100", GPU: "GTX 750 / R7 250X", RAM: "8 GB" },
+        "Високі": { CPU: "i5-9400F / R5 2600", GPU: "GTX 1060 / RX 580", RAM: "12 GB" },
+      },
+      rdr2: {
+        "Низькі": { CPU: "i5-2500K / FX-6300", GPU: "GTX 770 / R9 280", RAM: "8 GB" },
+        "Середні": { CPU: "i7-4770K / R5 1400", GPU: "GTX 1060 / RX 480", RAM: "12 GB" },
+        "Високі": { CPU: "i7-8700K / R5 3600", GPU: "RTX 2060 / RX 5700", RAM: "16 GB" },
+      },
+      re8: {
+        "Низькі": { CPU: "i5-7500 / R3 1200", GPU: "GTX 1050 Ti / RX 560", RAM: "8 GB" },
+        "Середні": { CPU: "i5-8600 / R5 2600", GPU: "GTX 1660 / RX 590", RAM: "12 GB" },
+        "Високі": { CPU: "i7-9700K / R5 3600X", GPU: "RTX 2070 / RX 6700 XT", RAM: "16 GB" },
+      },
+    };
+
+    function updateSpecs() {
+      const game = document.getElementById("game").value;
+      const specBlock = document.getElementById("specs");
+      const gameSpec = specs[game];
+
+      specBlock.innerHTML = "";
+
+      for (let setting in gameSpec) {
+        const { CPU, GPU, RAM } = gameSpec[setting];
+        specBlock.innerHTML += `
+          <div class="card">
+            <h3>${setting} налаштування</h3>
+            <ul>
+              <li><strong>CPU:</strong> ${CPU}</li>
+              <li><strong>GPU:</strong> ${GPU}</li>
+              <li><strong>RAM:</strong> ${RAM}</li>
+            </ul>
+          </div>
+        `;
+      }
+    }
+
+    window.onload = updateSpecs;
+  </script>
+</body>
+</html>
